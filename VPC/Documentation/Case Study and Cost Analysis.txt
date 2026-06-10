@@ -1,0 +1,72 @@
+Case Study: Designing a Secure Multi-Tier AWS VPC Environment
+Business Problem
+
+Many small businesses deploy servers directly to the internet without proper segmentation or access controls, increasing the risk of:
+
+Unauthorized access
+Credential attacks
+Lateral movement after compromise
+Excessive exposed services
+
+A more secure architecture is needed to separate public services from internal systems while maintaining administrative access and internet connectivity.
+
+Solution
+
+A secure multi-tier AWS VPC architecture was designed and implemented using:
+
+One public subnet
+One private subnet
+Bastion host for controlled SSH access
+Public web server
+Private backend server
+NAT Gateway for secure outbound traffic
+Layered security groups
+Segmented route tables
+
+This design minimizes internet exposure while preserving functionality.
+
+Security Outcomes
+
+The environment achieved the following improvements:
+
+✅ Administrative access restricted to one trusted public IP
+
+✅ Backend server completely hidden from the public internet
+
+✅ SSH access chained through controlled trust relationships
+
+✅ Web traffic restricted to HTTP/HTTPS only
+
+✅ Private subnet internet access enabled without public exposure
+
+Cost Analysis (Approximate AWS Monthly Estimate)
+Resource	Approx Monthly Cost
+3 × t2.micro EC2	$0–$25 (Free Tier eligible initially)
+NAT Gateway	~$32–$38
+Elastic IP	~$0–$4
+Data Transfer	Minimal in lab
+EBS Storage	~$3–$6
+Estimated Lab Cost
+
+~$35–$50/month
+
+Cost Optimization Considerations
+
+The NAT Gateway is the largest expense in this architecture.
+
+For a learning or portfolio environment, a cheaper alternative could be:
+
+NAT Instance (EC2-based)
+
+Benefits:
+
+Lower cost
+More control
+
+Tradeoffs:
+
+Requires patching
+Less highly available
+Additional management overhead
+
+For production workloads, NAT Gateway is preferred for reliability and managed availability.
